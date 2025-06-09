@@ -36,5 +36,3 @@ glueContext.write_dynamic_frame.from_options(
 )
 
 job.commit()
-# Placeholder for AWS Glue ETL job script
-# Will include: timestamp conversion, filter logic, aggregation
