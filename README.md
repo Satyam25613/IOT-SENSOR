@@ -6,7 +6,9 @@ This project demonstrates an end-to-end ETL pipeline using AWS Glue and Amazon S
 
 s3://iot-sensor-data-satyam/
 ├── raw/ # Raw CSV or JSON sensor data
+
 ├── processed/ # Cleaned and transformed data in Parquet format
+
 └── aggregated/ # Hourly average temperature data in Parquet format
 
 ## Workflow Overview
@@ -58,7 +60,9 @@ The aggregated output contains columns such as:
 
 IOT-SENSOR/
 ├── etl_job_1_clean_and_transform.py # Glue script for cleaning raw data
+
 ├── etl_job_2_aggregate_hourly_avg.py # Glue script for aggregating data
+
 └── README.md
 
 
