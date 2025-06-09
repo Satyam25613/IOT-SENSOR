@@ -7,8 +7,11 @@ This project demonstrates an end-to-end ETL pipeline using AWS Glue and Amazon S
 ##  S3 Bucket Structure
 
 s3://iot-sensor-data-satyam/
+
 ├── raw/ # Raw CSV or JSON sensor data
+
 ├── processed/ # Cleaned and transformed data in Parquet format
+
 └── aggregated/ # Hourly average temperature data in Parquet format
 
 
