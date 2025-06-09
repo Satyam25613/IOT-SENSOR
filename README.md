@@ -1,65 +1,77 @@
-IoT Sensor Data Processor
-This project is designed to ingest, clean, transform, and aggregate raw IoT sensor data using AWS Glue and Amazon S3. It handles real-time sensor logs (temperature, humidity, etc.) and outputs cleaned and summarized datasets for further analysis or visualization.
+# IoT Sensor Data Processor
 
-Project Structure
-S3 Buckets:
-bash
+This project demonstrates an end-to-end ETL pipeline using AWS Glue and Amazon S3 to process IoT sensor data. It ingests raw sensor logs, performs data cleaning and transformation, calculates hourly temperature averages, and stores the outputs in an optimized format for analysis.
+
+## S3 Bucket Structure
+
+s3://iot-sensor-data-satyam/
+├── raw/ # Raw CSV or JSON sensor data
+├── processed/ # Cleaned and transformed data in Parquet format
+└── aggregated/ # Hourly average temperature data in Parquet format
+
+markdown
 Copy
 Edit
-s3://iot-sensor-data-satyam/
-├── raw/         # Raw CSV sensor data
-├── processed/   # Cleaned data stored in Parquet format
-└── aggregated/  # Hourly average temperature in Parquet
-Architecture Overview
-Source: Raw IoT sensor logs (.csv) uploaded to raw/
 
-ETL Job 1: Reads, cleans, transforms the data, stores results in processed/
+## Workflow Overview
 
-ETL Job 2: Aggregates hourly average temperature, writes to aggregated/
+1. **Raw Data Ingestion**
+   - Sensor logs (e.g., temperature, humidity) are uploaded to the `raw/` folder in CSV format.
 
-ETL Steps
-1. Cleaning & Transformation (ETL Job 1)
-Reads CSV from raw/
+2. **ETL Job 1: Data Cleaning and Transformation**
+   - Converts timestamps to proper format.
+   - Filters out temperature readings below -50°C or above 150°C.
+   - Outputs the cleaned data to the `processed/` folder in Parquet format.
 
-Parses and converts timestamp
+3. **ETL Job 2: Aggregation**
+   - Reads cleaned data from the `processed/` folder.
+   - Extracts the hour and day from the timestamp.
+   - Calculates average temperature per hour.
+   - Outputs the aggregated results to the `aggregated/` folder.
 
-Filters out faulty temperature values (< -50 or > 150)
+## Technologies Used
 
-Writes output as Parquet to processed/
+- **AWS Glue** – Serverless ETL engine using PySpark
+- **Amazon S3** – Scalable object storage for data lake architecture
+- **Apache Parquet** – Columnar data format for efficient querying
+- **PySpark** – Distributed data processing
+- **GitHub** – Version control and documentation
 
-2. Aggregation (ETL Job 2)
-Reads Parquet from processed/
+## How to Use
 
-Extracts hour and day from timestamp
+1. **Upload Raw Data**
+   - Place your sensor CSV files into `s3://iot-sensor-data-satyam/raw/`
 
-Calculates average temperature grouped by hour
+2. **Run ETL Jobs**
+   - Execute **ETL Job 1** in AWS Glue to clean and store data in `processed/`
+   - Execute **ETL Job 2** to compute hourly temperature averages into `aggregated/`
 
-Writes aggregated data to aggregated/
+3. **Download or Query Results**
+   - Use AWS Athena, QuickSight, or download Parquet files from `processed/` and `aggregated/` for analysis.
 
-Technologies Used
-AWS Glue (ETL pipelines using Spark & PySpark)
+## Example Output
 
-Amazon S3 (Data storage: raw, processed, aggregated)
+The aggregated output contains columns such as:
 
-Apache Parquet (Efficient columnar storage format)
+| day | hour | avg_temp |
+|-----|------|----------|
+| 09  | 12   | 27.4     |
+| 09  | 13   | 28.1     |
 
-GitHub (Version control and documentation)
+## Repository Structure
 
-How to Run
-Upload raw sensor logs (sensor-data.csv) to s3://iot-sensor-data-satyam/raw/
+IOT-SENSOR/
+├── etl_job_1_clean_and_transform.py # Glue script for cleaning raw data
+├── etl_job_2_aggregate_hourly_avg.py # Glue script for aggregating data
+└── README.md
 
-Trigger ETL Job 1 from AWS Glue to clean and transform the data
+nginx
+Copy
+Edit
 
-Trigger ETL Job 2 to generate hourly averages
 
-Output will be available in the processed/ and aggregated/ S3 folders
 
-Output Usage
-You can:
-
-Download Parquet files for analysis
-
-Use AWS Athena to query data
-
-Integrate with QuickSight or BI tools for visualization
-
+SATYAM SINGH RAJPUT 
+Bachelor of Computer Applications (BCA), Sri Balaji University, Pune  
+Specialization: Cloud & Cybersecurity  
+GitHub: [@Satyam25613](https://github.com/Satyam25613)
