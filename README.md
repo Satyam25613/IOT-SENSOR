@@ -71,7 +71,7 @@ Edit
 
 
 
-SATYAM SINGH RAJPUT 
+SATYAM SINGH RAJPUT-
 Bachelor of Computer Applications (BCA), Sri Balaji University, Pune  
 Specialization: Cloud & Cybersecurity  
 GitHub: [@Satyam25613](https://github.com/Satyam25613)
